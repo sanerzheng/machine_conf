@@ -93,7 +93,7 @@ endif
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -138,8 +138,8 @@ endif
 
 
 " Add a bit extra margin to the left
-set foldcolumn=1
-
+"set foldcolumn=1
+set nu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
