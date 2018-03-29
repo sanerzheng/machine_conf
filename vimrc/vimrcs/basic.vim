@@ -312,6 +312,55 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Filling File Header
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+au BufNewFile *.cpp,*.c,*.py,*.sh,*.h,*.java exe ":call SetTitle()"
+nmap <leader>it :call SetTitle()<cr>
+function! SetTitle() 
+	if &filetype == 'sh' 
+		call setline(1, "\#!/bin/bash") 
+		call append(line("."), "\#########################################################################") 
+		call append(line(".")+1, "\# Author: zhengqiang ( zhengqiang3@360.com )") 
+		call append(line(".")+2, "\# Created Time: ".strftime("%Y-%m-%d %H:%M:%S")) 
+		call append(line(".")+3, "\# File Name: ".expand("%")) 
+		call append(line(".")+4, "\# Description: ") 
+		call append(line(".")+5, "\#########################################################################") 
+		call append(line(".")+6, "") 
+	endif
+	if &filetype == 'python'
+		call setline(1,"\#!/usr/bin/env python")
+		call append(line("."),"\# -*- coding:utf-8 -*-")
+		call append(line(".")+1, "\#########################################################################") 
+		call append(line(".")+2, "\# Author: zhengqiang ( zhengqiang@360.com )") 
+		call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d %H:%M:%S")) 
+		call append(line(".")+4, "\# File Name: ".expand("%")) 
+		call append(line(".")+5, "\# Description: ") 
+		call append(line(".")+6, "\#########################################################################") 
+		call append(line(".")+7, "") 
+		call append(line(".")+8, "import sys,os") 
+        call append(line(".")+9,"")
+        call append(line(".")+10,"def main(argv):")
+        call append(line(".")+11,"")
+        call append(line(".")+12,"")
+        call append(line(".")+13,"if __name__ ==\"__main__\":")
+        call append(line(".")+14,"    main(sys.argv)")
+	endif
+	if &filetype == 'cpp'
+		call setline(1, "#include<iostream>")
+	endif
+	if &filetype == 'c'
+		call setline(1, "#include<stdio.h>")
+		call append(line("."), "")
+	endif
+	if &filetype == 'java'
+		call append(line(".")+6,"public class ".expand("%"))
+		call append(line(".")+7,"")
+	endif
+	"新建文件后，自动定位到文件末尾
+	autocmd BufNewFile * normal G
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
