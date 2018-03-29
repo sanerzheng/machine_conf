@@ -317,7 +317,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 au BufNewFile *.cpp,*.c,*.py,*.sh,*.h,*.java exe ":call SetTitle()"
-nmap <leader>it :call SetTitle()<cr>
+nmap <leader>tt :call SetTitle()<cr>G
 function! SetTitle() 
 	if &filetype == 'sh' 
 		call setline(1, "\#!/bin/bash") 
